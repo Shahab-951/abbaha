@@ -1,0 +1,1354 @@
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("../assets/fonts/Vazirmatn-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("../assets/fonts/Vazirmatn-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("../assets/fonts/Vazirmatn-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* رنگ اصلی */
+    --primary: #1769AA;
+    --primary-dark: #125487;
+    --primary-soft: #EAF4FB;
+    --primary-softer: #F4F9FC;
+
+    /* رنگ ثانویه سبز */
+    --success: #3F7D68;
+    --success-soft: #EEF6F3;
+
+    /* رنگ تأکیدی نیلی */
+    --indigo: #3949AB;
+    --indigo-soft: #EEF0FF;
+
+    /* خطا */
+    --danger: #C62828;
+    --danger-soft: #FFF4F4;
+
+    /* هشدار */
+    --warning-soft: #FFF8E8;
+
+    /* متن */
+    --text: #263238;
+    --muted: #687780;
+
+    /* خطوط */
+    --border: #D9E2E7;
+    --border-strong: #C7D3D9;
+
+    /* سطوح */
+    --surface: #FFFFFF;
+    --surface-soft: #F7F9FA;
+    --page: #F1F4F6;
+
+    /* سایه */
+    --shadow: 0 8px 28px rgba(38, 50, 56, 0.07);
+    --shadow-soft: 0 3px 14px rgba(38, 50, 56, 0.05);
+
+    /* گوشه‌ها */
+    --radius: 14px;
+    --radius-small: 9px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    direction: rtl;
+    font-family: "Vazirmatn", sans-serif;
+    background: var(--page);
+    color: var(--text);
+    padding: 28px 18px 36px;
+    line-height: 1.7;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: min(900px, 100%);
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid rgba(216, 224, 229, 0.85);
+    border-radius: 18px;
+    padding: 34px;
+    box-shadow: var(--shadow);
+}
+
+/* -------------------- بخش‌های اصلی فرم -------------------- */
+
+section.form-section {
+    background: #F7FAFC;
+    border: 1px solid #DFE8EE;
+    border-radius: 14px;
+
+    padding: 22px;
+
+    margin-top: 18px;
+}
+
+section.form-section:first-of-type {
+    margin-top: 0;
+}
+
+/* مجموع مصرف کارت مستقل نباشد */
+#calculatedTotalSection {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin-top: 18px;
+}
+
+/* بخش دکمه محاسبه کارت مستقل نباشد */
+section.form-section:has(#calculateBtn) {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin-top: 18px;
+    margin-bottom: 28px;
+}
+
+/* hrهای تزئینی کارت نباشند */
+hr.form-section {
+    display: none;
+}
+
+/* -------------------- Header -------------------- */
+
+.app-header {
+    padding: 4px 0 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    text-align: right;
+}
+
+.brand-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: var(--primary-soft);
+    border: 1px solid #CFE3F0;
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 12px rgba(23, 105, 170, 0.08);
+
+    overflow: hidden;
+}
+
+.brand-icon img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+}
+
+.brand-text {
+    text-align: right;
+}
+
+.brand-text h1 {
+    margin: 0 0 4px;
+
+    color: var(--primary);
+
+    font-size: clamp(26px, 4vw, 32px);
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.brand-text .subtitle {
+    margin: 0;
+
+    color: #78909C;
+
+    font-size: 13px;
+}
+
+hr {
+    margin: 28px 0;
+    border: 0;
+    border-top: 1px solid var(--border);
+}
+
+h2,
+h3 {
+    color: var(--text);
+    font-weight: 700;
+}
+
+h2 {
+    color: var(--primary);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0 0 18px;
+}
+
+h3 {
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+section > p,
+#unitsHelp {
+    color: #718189;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+
+    margin: 17px 0 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #455A64;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    border: 1px solid #D8E2DF;
+    border-radius: 10px;
+
+    background: #FCFDFC;
+    color: var(--text);
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+input,
+select {
+    min-height: 48px;
+    padding: 11px 13px;
+}
+
+textarea {
+    min-height: 100px;
+    padding: 12px 13px;
+    resize: vertical;
+    line-height: 1.8;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    background: #FFFFFF;
+    border-color: #C4D6D0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+
+    background: #FFFFFF;
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(23, 105, 170, 0.12);
+}
+
+/* -------------------- روش محاسبه -------------------- */
+
+.method-box {
+    display: grid;
+    gap: 10px;
+    background: var(--primary-softer);
+    border: 1px solid #dceafb;
+    border-radius: var(--radius);
+    padding: 12px;
+}
+
+.method-box label {
+    margin: 0;
+    padding: 15px 16px;
+    background: var(--surface);
+    border: 1px solid transparent;
+    border-radius: 11px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.method-box label:hover {
+    border-color: #c9dff6;
+}
+
+.method-box label:has(input:checked) {
+    border-color: rgba(25, 118, 210, 0.55);
+    background: #f7fbff;
+}
+
+.method-box input[type="radio"] {
+    width: auto;
+    min-height: auto;
+    margin: 0 0 0 8px;
+    padding: 0;
+    accent-color: var(--primary);
+    vertical-align: middle;
+}
+
+.method-description {
+    margin: 9px 0 0;
+    padding: 9px 11px;
+    border-right: 3px solid var(--primary);
+    border-radius: 7px;
+    background: #f6f9fc;
+    color: #53636b;
+    font-size: 12.5px;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+/* -------------------- دکمه‌ها -------------------- */
+
+button {
+
+    width: 100%;
+
+    min-height: 52px;
+
+    padding: 12px 18px;
+
+    background: var(--primary);
+
+    color: #FFFFFF;
+
+    border: 0;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+
+        0 4px 12px rgba(23, 105, 170, 0.16);
+
+    transition:
+
+        background-color 0.18s ease,
+
+        box-shadow 0.18s ease,
+
+        transform 0.15s ease;
+
+}
+
+button:hover {
+
+    background: var(--primary-dark);
+
+    box-shadow:
+
+        0 6px 16px rgba(23, 105, 170, 0.20);
+
+}
+
+button:active {
+
+    transform: translateY(1px);
+
+}
+
+button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+
+}
+
+/* -------------------- دکمه‌های خروجی -------------------- */
+
+.secondary-button {
+    width: auto;
+    min-height: 42px;
+
+    margin-top: 10px;
+    padding: 9px 16px;
+
+    background: #F2F6F9;
+    color: #455A64;
+
+    border: 1px solid #D6E1E7;
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    box-shadow: none;
+
+    transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.15s ease;
+}
+
+.secondary-button:hover {
+    background: var(--primary-soft);
+    border-color: #C6DDEB;
+    color: var(--primary-dark);
+
+    box-shadow: none;
+}
+
+.secondary-button:active {
+    transform: translateY(1px);
+}
+
+.inline-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: max-content;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.inline-label input {
+    width: auto;
+    min-height: auto;
+    padding: 0;
+    accent-color: var(--primary);
+    box-shadow: none;
+}
+
+/* -------------------- تاریخ -------------------- */
+
+.jalali-date {
+    position: relative;
+}
+
+.jalali-date .date-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: right;
+    min-height: 48px;
+    background: #fff;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.jalali-date .date-trigger:hover {
+    background: #fafcfd;
+    color: var(--text);
+    border-color: #b5c2ca;
+    box-shadow: none;
+}
+
+.jalali-date .date-trigger:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.jalali-date.deadline-disabled .date-trigger {
+    background-color: #eef1f3 !important;
+    color: #8a969c !important;
+    border-color: #d8e0e5 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+}
+
+.jalali-calendar {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 6px);
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 16px 35px rgba(38, 50, 56, 0.14);
+    overflow: hidden;
+}
+
+.calendar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--primary);
+    color: #fff;
+}
+
+.calendar-head button {
+    width: 36px;
+    min-height: 36px;
+    height: 36px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 21px;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.calendar-head button:hover {
+    background: rgba(255, 255, 255, 0.24);
+    box-shadow: none;
+}
+
+.calendar-head b {
+    color: #fff;
+    font-size: 14px;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 10px 10px 5px;
+    color: #71808a;
+    font-size: 11px;
+    text-align: center;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    padding: 5px 10px 10px;
+}
+
+.calendar-days button {
+    width: 100%;
+    min-height: 36px;
+    padding: 5px 0;
+
+    background: var(--primary-soft);
+    color: var(--primary);
+
+    border-radius: 8px;
+    font-size: 13px;
+
+    box-shadow: none;
+
+    transition:
+        background-color 0.18s ease,
+        color 0.18s ease;
+}
+
+.calendar-days button:hover {
+    background: #DCECF7;
+    color: var(--primary-dark);
+    box-shadow: none;
+}
+
+.calendar-days span {
+    display: block;
+    padding: 5px 0;
+}
+
+.calendar-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 11px;
+    background: #f8fafb;
+    border-top: 1px solid var(--border);
+}
+
+.calendar-footer button {
+    flex: 1;
+    width: auto;
+    min-height: 38px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    box-shadow: none;
+}
+
+.calendar-today {
+    background: var(--primary);
+    color: #fff;
+}
+
+.calendar-today:hover {
+    background: var(--primary-dark);
+    box-shadow: none;
+}
+
+.calendar-cancel {
+    background: #fff !important;
+    color: #596970 !important;
+    border: 1px solid var(--border-strong) !important;
+}
+
+.calendar-cancel:hover {
+    background: #f2f5f7 !important;
+}
+
+/* -------------------- جدول واحدها و نتیجه -------------------- */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 18px;
+    overflow: hidden;
+    border: 1px solid #D6E1E7;
+    border-radius: 12px;
+    background: #FFFFFF;
+    box-shadow:
+        0 2px 10px rgba(23, 105, 170, 0.04);
+}
+
+table th {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    padding: 12px 10px;
+    border-bottom: 1px solid #CFE0EA;
+    border-left: 1px solid #DCE7ED;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+table th:last-child {
+    border-left: 0;
+}
+
+table td {
+    padding: 9px 8px;
+    border-bottom: 1px solid #E7EDF1;
+    border-left: 1px solid #EDF2F5;
+    text-align: center;
+    background: #FFFFFF;
+    font-size: 13px;
+}
+
+table td:last-child {
+    border-left: 0;
+}
+
+table tr:last-child td {
+    border-bottom: 0;
+}
+
+table tbody tr:hover td {
+    background: #F7FAFC;
+}
+
+table input {
+    width: calc(100% - 4px);
+    margin: 0 2px;
+    min-height: 40px;
+    padding: 7px 8px;
+    text-align: center;
+    border-radius: 8px;
+    background: #FCFDFE;
+    border: 1px solid #D9E3E8;
+}
+
+table input:hover {
+    background: #FFFFFF;
+    border-color: #BFD4E0;
+}
+
+table input:focus {
+    outline: none;
+    background: #FFFFFF;
+    border-color: var(--primary);
+    box-shadow:
+        0 0 0 3px rgba(23, 105, 170, 0.10);
+}
+
+#totalUsage {
+    margin-top: 10px;
+
+    padding: 14px 18px;
+
+    background: var(--success-soft);
+    color: var(--success);
+
+    border: 1px solid #D5E8E0;
+    border-radius: 11px;
+
+    text-align: center;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    box-shadow:
+        0 2px 8px rgba(63, 125, 104, 0.05);
+}
+
+/* -------------------- نتیجه محاسبه -------------------- */
+
+#result {
+    background: #F8FAFB;
+
+    border: 1px solid #DCE5E9;
+    border-radius: 14px;
+
+    padding: 22px;
+
+    min-height: 80px;
+
+    box-shadow:
+        0 4px 16px rgba(38, 50, 56, 0.05);
+}
+
+#result:empty {
+    display: none;
+}
+
+.result-summary {
+    margin-top: 20px;
+    padding-top: 16px;
+
+    border-top: 1px solid #DCE5E9;
+}
+
+.result-summary p {
+    margin: 6px 0;
+
+    color: #56666E;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.result-summary p:first-child {
+    color: #356B5E;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+#calculatedTotalSection {
+    margin-top: 26px;
+}
+
+.error-message {
+    color: #b71c1c;
+    font-weight: 700;
+}
+
+/* -------------------- حالت‌های خطا -------------------- */
+
+.field-error {
+    margin-top: 5px;
+    color: var(--danger);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.validation-error {
+    border-color: #d32f2f !important;
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.08) !important;
+}
+
+.table-validation-error {
+    margin: 12px 0;
+    padding: 11px 13px;
+    background: var(--danger-soft);
+    border: 1px solid #ffcdd2;
+    border-radius: 10px;
+    color: #b71c1c;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.table-validation-error strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.table-validation-error ul {
+    margin: 4px 0 0;
+    padding-right: 20px;
+}
+
+.table-validation-error small {
+    font-size: 13px;
+}
+
+.input-error td,
+.reading-error td,
+.validation-row-error td {
+    background: #FFF5F5;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.input-error input,
+.reading-error input,
+.validation-row-error input {
+    background: #FFF9F9;
+
+    border-color: #E57373;
+}
+
+.input-error td:first-child,
+.reading-error td:first-child,
+.validation-row-error td:first-child {
+    box-shadow:
+        inset -3px 0 0 #E57373;
+}
+
+.calculated-consumption {
+    font-weight: 600;
+}
+
+.reading-error .calculated-consumption,
+.validation-row-error .calculated-consumption {
+    color: #C62828;
+    font-weight: 700;
+}
+
+/* -------------------- شماره کارت و واحد -------------------- */
+
+.card-number {
+    display: inline;
+}
+
+.unit-label {
+    color: #87949b;
+    font-weight: 500;
+}
+
+.verified {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.unit-edit-btn {
+    width: auto;
+    min-height: auto;
+    padding: 2px 6px;
+    margin-right: 5px;
+    background: transparent;
+    color: inherit;
+    font-size: 16px;
+    box-shadow: none;
+}
+
+.unit-edit-btn:hover {
+    background: rgba(25, 118, 210, 0.08);
+    color: var(--primary);
+    box-shadow: none;
+}
+
+.unit-number {
+    width: 70px;
+    padding: 5px;
+    border: 0;
+    background: transparent;
+    text-align: center;
+}
+
+.unit-number:not([readonly]) {
+    border: 1px solid var(--border-strong);
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* -------------------- ورودی‌های عددی -------------------- */
+
+input[type="number"],
+input[type="text"][inputmode="numeric"],
+.unit-number,
+.people-value,
+.previous-reading,
+.current-reading {
+    text-align: center;
+    direction: ltr;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* -------------------- پرداخت فوری -------------------- */
+
+/* -------------------- موبایل -------------------- */
+
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 20px 16px;
+        border-radius: 14px;
+        box-shadow: 0 5px 18px rgba(38, 50, 56, 0.06);
+    }
+
+    header {
+        padding-top: 2px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    hr {
+        margin: 22px 0;
+    }
+
+    .method-box {
+        padding: 9px;
+    }
+
+    .method-box label {
+        padding: 13px 12px;
+    }
+
+    label {
+        margin-top: 15px;
+    }
+
+    input,
+    select,
+    textarea,
+    .jalali-date .date-trigger {
+        font-size: 14px;
+    }
+
+    table {
+        margin-top: 14px;
+        font-size: 12px;
+    }
+
+    table th,
+    table td {
+        padding: 7px 5px;
+    }
+
+    table input {
+        min-height: 38px;
+        padding: 6px;
+        font-size: 13px;
+    }
+
+    #totalUsage {
+        font-size: 24px;
+        padding: 14px;
+    }
+
+    #result {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .secondary-button {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .app-header {
+        padding: 18px 16px;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .brand-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+    }
+
+    .brand-text h1 {
+        font-size: 22px;
+    }
+
+    .brand-text .subtitle {
+        font-size: 12px;
+    }
+
+    .container {
+        width: calc(100% - 24px);
+        margin: 14px auto;
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .form-section {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .section-title {
+        font-size: 16px;
+    }
+
+    .method-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .method-option {
+        padding: 12px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
+
+    input,
+    select {
+        min-height: 42px;
+        font-size: 14px;
+    }
+
+    /* جدول واحدها */
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .units-table {
+        min-width: 540px;
+        width: 100%;
+    }
+
+    .units-table th,
+    .units-table td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    .units-table input {
+        min-height: 36px;
+        padding: 6px;
+        font-size: 13px;
+    }
+
+    /* مجموع مصرف */
+    .total-consumption {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    /* دکمه اصلی */
+    .calculate-btn {
+        width: 100%;
+        min-height: 46px;
+        font-size: 15px;
+    }
+
+    /* دکمه‌های خروجی */
+    .result-actions {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .result-actions button {
+        width: 100%;
+        min-height: 42px;
+    }
+
+    /* نتیجه */
+    .result-section {
+        padding: 14px;
+    }
+
+    .result-summary {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .summary-item {
+        padding: 10px;
+    }
+
+    /* جدول نتیجه */
+    #result .result-table-wrapper {
+    width: 100% !important;
+    overflow: visible !important;
+    -webkit-overflow-scrolling: auto !important;
+}
+
+    .result-table {
+        min-width: 540px;
+    }
+
+    .result-table th,
+    .result-table td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    /* تقویم */
+    .calendar-popup {
+        max-width: calc(100vw - 32px);
+    }
+}
+
+/* -------------------- چاپ -------------------- */
+
+#result table th {
+    background: #E3F0F8;
+    color: #125487;
+    font-weight: 700;
+}
+
+#result table tbody tr:nth-child(odd) td {
+    background: #FFFFFF;
+}
+
+#result table tbody tr:nth-child(even) td {
+    background: #EEF5FC;
+}
+
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    html,
+    body {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+    }
+
+    .app-footer {
+        display: none !important;
+    }
+
+    body > .container > * {
+        display: none !important;
+    }
+
+    body > .container > #result {
+        display: block !important;
+    }
+
+    .container {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    #result {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin: 0 !important;
+        padding: 10px !important;
+        background: #fff !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        direction: rtl;
+        overflow: visible !important;
+    }
+
+    #result .no-print,
+    #result .secondary-button,
+    #result button {
+        display: none !important;
+    }
+
+    #result table {
+    width: 100% !important;
+    margin-top: 10px !important;
+
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    table-layout: fixed !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+
+    font-size: 12px !important;
+    background: #fff !important;
+
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+}
+
+#result table thead {
+    display: table-header-group !important;
+}
+
+#result table tbody {
+    display: table-row-group !important;
+}
+
+#result table tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+#result table th,
+#result table td {
+    border: 1pt solid #000 !important;
+    padding: 4px 6px !important;
+    text-align: center !important;
+    color: #000 !important;
+}
+
+#result table th {
+    background: #E3F0F8 !important;
+    color: #125487 !important;
+    font-weight: 700 !important;
+}
+
+#result table tbody tr:nth-child(odd) td {
+    background: #FFFFFF !important;
+}
+
+#result table tbody tr:nth-child(even) td {
+    background: #EEF5FC !important;
+}
+
+    #result .result-summary {
+        margin-top: 8px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    #result .result-summary p {
+        margin: 2px 0 !important;
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+    }
+
+    #result .result-summary b {
+        font-weight: 700 !important;
+    }
+}
+
+.app-footer {
+    width: 100%;
+    margin-top: 24px;
+    padding: 20px 16px 24px;
+    text-align: center;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+
+.footer-title {
+    margin-bottom: 5px;
+    color: var(--primary-dark);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.footer-description {
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.footer-copyright {
+    font-size: 11px;
+    color: var(--muted);
+}
