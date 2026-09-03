@@ -49,7 +49,7 @@
         <hr>
 
         <!-- ===== فرم (با کلاس form-section برای مخفی شدن) ===== -->
-        <section class="form-section">
+        <section class="form-section hidden">
             <h2>اطلاعات قبض</h2>
 
             <label for="periodStart">تاریخ قرائت قبلی</label>
@@ -81,15 +81,15 @@
             </label>
 
             <label for="cardNumber">شماره کارت ساختمان</label>
-            <input type="text" id="cardNumber" inputmode="text">
+            <input type="text" id="cardNumber" inputmode="text" autocomplete="off">
 
             <label for="notes">توضیحات</label>
             <textarea id="notes" rows="3"></textarea>
         </section>
 
-        <hr class="form-section">
+        <hr class="form-section hidden">
 
-        <section class="form-section">
+        <section class="form-section hidden">
     <h2 id="unitsTitle">اطلاعات واحدها</h2>
 
     <p id="unitsHelp">
@@ -104,20 +104,20 @@
     <div id="unitsTable"></div>
 </section>
 
-        <section class="form-section" id="calculatedTotalSection">
+        <section class="form-section hidden" id="calculatedTotalSection">
             <h3 id="totalLabel">مجموع مصرف کنتورهای فرعی</h3>
             <div id="totalUsage">۰</div>
         </section>
 
-        <hr class="form-section">
+        <hr class="form-section hidden">
 
-        <section class="form-section">
+        <section class="form-section hidden">
             <button id="calculateBtn">محاسبه</button>
         </section>
 
-        <hr class="form-section">
+        <hr class="form-section hidden">
 
-        <div id="result" class="form-section"></div>
+        <div id="result" class="form-section hidden"></div>
     </div>
 
     <footer class="app-footer">
