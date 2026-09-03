@@ -292,10 +292,11 @@ function setDeadlineState() {
 function toggleFormVisibility() {
     const method = currentMode();
     const sections = document.querySelectorAll('.form-section');
+    
     if (method) {
-        sections.forEach(section => section.style.display = '');
+        sections.forEach(section => section.classList.remove('hidden'));
     } else {
-        sections.forEach(section => section.style.display = 'none');
+        sections.forEach(section => section.classList.add('hidden'));
     }
 }
 
