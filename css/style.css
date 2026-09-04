@@ -1354,3 +1354,56 @@ input[type="number"] {
     font-size: 11px;
     color: var(--muted);
 }
+
+/* ===== سوییچ گرد کردن مبالغ ===== */
+.round-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #455A64;
+    margin-bottom: 14px;
+    user-select: none;
+}
+
+.round-toggle input {
+    display: none;
+}
+
+.toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: #CFD8DC;
+    border-radius: 12px;
+    transition: 0.25s ease;
+    flex-shrink: 0;
+}
+
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    transition: 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.round-toggle input:checked + .toggle-slider {
+    background: var(--primary);
+}
+
+.round-toggle input:checked + .toggle-slider::before {
+    transform: translateX(-20px);
+}
+
+.toggle-label {
+    line-height: 1.4;
+}
+/* ===== پایان سوییچ ===== */
