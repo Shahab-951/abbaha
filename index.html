@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="سامانه محاسبه و تقسیم هزینه آب ساختمان بر اساس مصرف کنتورهای فرعی، کنتور اصلی یا تعداد نفرات.">
-<title>آب‌بها | محاسبه قبض آب ساختمان</title>
-<link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="سامانه محاسبه و تقسیم هزینه آب ساختمان بر اساس مصرف کنتورهای فرعی، کنتور اصلی یا تعداد نفرات.">
+    <title>آب‌بها | محاسبه قبض آب ساختمان</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="container">
         <header class="app-header">
-    <div class="brand">
-        <div class="brand-icon" aria-hidden="true">
-    <img src="assets/logo.png" alt="">
-</div>
-        <div class="brand-text">
-            <h1>آب‌بها</h1>
-            <p class="subtitle">سامانه محاسبه قبض آب ساختمان</p>
-        </div>
-    </div>
-</header>
+            <div class="brand">
+                <div class="brand-icon" aria-hidden="true">
+                    <img src="assets/logo.png" alt="">
+                </div>
+                <div class="brand-text">
+                    <h1>آب‌بها</h1>
+                    <p class="subtitle">سامانه محاسبه قبض آب ساختمان</p>
+                </div>
+            </div>
+        </header>
 
         <hr>
 
@@ -29,17 +32,17 @@
             <h2>روش محاسبه</h2>
             <div class="method-box">
                 <label>
-                    <input type="radio" name="method" value="sub-meter"> 
+                    <input type="radio" name="method" value="sub-meter">
                     تقسیم قبض بر اساس مصرف کنتورهای فرعی
                     <p class="method-description" id="desc-sub-meter" hidden></p>
                 </label>
                 <label>
-                    <input type="radio" name="method" value="main-meter"> 
+                    <input type="radio" name="method" value="main-meter">
                     تقسیم با کنتور اصلی و تقسیم اختلاف
                     <p class="method-description" id="desc-main-meter" hidden></p>
                 </label>
                 <label>
-                    <input type="radio" name="method" value="people"> 
+                    <input type="radio" name="method" value="people">
                     تقسیم قبض بر اساس تعداد نفرات
                     <p class="method-description" id="desc-people" hidden></p>
                 </label>
@@ -90,19 +93,20 @@
         <hr class="form-section hidden">
 
         <section class="form-section hidden">
-    <h2 id="unitsTitle">اطلاعات واحدها</h2>
+            <h2 id="unitsTitle">اطلاعات واحدها</h2>
 
-    <p id="unitsHelp">
-        پس از وارد کردن تعداد واحد، رقم قبلی و رقم فعلی کنتور هر واحد را وارد کنید؛ مقدار مصرف خودکار محاسبه می‌شود.
-    </p>
+            <p id="unitsHelp">
+                پس از وارد کردن تعداد واحد، رقم قبلی و رقم فعلی کنتور هر واحد را وارد کنید؛ مقدار مصرف خودکار محاسبه
+                می‌شود.
+            </p>
 
-    <label class="inline-label" id="zeroConsumptionOption" hidden>
-        <input type="checkbox" id="excludeZeroConsumption">
-        واحدهای بدون مصرف در تقسیم هزینه شرکت نکنند.
-    </label>
+            <label class="inline-label" id="zeroConsumptionOption" hidden>
+                <input type="checkbox" id="excludeZeroConsumption">
+                واحدهای بدون مصرف در تقسیم هزینه شرکت نکنند.
+            </label>
 
-    <div id="unitsTable"></div>
-</section>
+            <div id="unitsTable"></div>
+        </section>
 
         <section class="form-section hidden" id="calculatedTotalSection">
             <h3 id="totalLabel">مجموع مصرف کنتورهای فرعی</h3>
@@ -131,11 +135,12 @@
         <div class="footer-copyright">© ۱۴۰۵ — تمامی حقوق محفوظ است</div>
     </footer>
 
-<script src="js/calculator.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@4.0.0/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@5.0.8/dist/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
-<script src="js/app.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@4.0.0/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@5.0.8/dist/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+    <script src="js/app.js"></script>
 </body>
+
 </html>
