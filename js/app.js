@@ -1330,10 +1330,19 @@ return isValid;
 
 function renderResult(calculation, bills, period) {
     const isMeter = currentMode() !== 'people';
+    const roundCheckbox = document.getElementById('roundUpAmounts');
+    const shouldRound = roundCheckbox ? roundCheckbox.checked : false;
+
+    const displayAmount = (value) => {
+        if (shouldRound) {
+            return formatMoney(Math.ceil(value / 100) * 100);
+        }
+        return formatMoney(value);
+    };
     const header = isMeter ? '<tr><th>واحد</th><th>رقم قبلی</th><th>رقم فعلی</th><th>مقدار مصرف</th><th>مبلغ</th></tr>' : '<tr><th>واحد</th><th>تعداد نفرات</th><th>مبلغ</th></tr>';
     const rows = calculation.rows.map(row => isMeter
-    ? `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.previous)}</td><td>${formatPlainNumber(row.current)}</td><td>${formatPlainNumber(row.consumption)}</td><td>${formatMoney(row.amount)}</td></tr>`
-    : `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.people)}</td><td>${formatMoney(row.amount)}</td></tr>`
+    ? `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.previous)}</td><td>${formatPlainNumber(row.current)}</td><td>${formatPlainNumber(row.consumption)}</td><td>${displayAmount(row.amount)}</td></tr>`
+    : `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.people)}</td><td>${displayAmount(row.amount)}</td></tr>`
 ).join('');
     const deadline = $('urgentPayment').checked ? 'فوری' : getSelectedDate('paymentDeadline', 'مهلت پرداخت').text;
     const cardValue = $('cardNumber').value.trim();
@@ -1443,6 +1452,16 @@ function generateExcel(calculation, bills, period) {
             return Math.round(Number(value) || 0);
         };
 
+        const roundAmountForTable = (value) => {
+            const roundCheckbox = document.getElementById('roundUpAmounts');
+            const shouldRound = roundCheckbox ? roundCheckbox.checked : false;
+            let num = Math.round(Number(value) || 0);
+            if (shouldRound) {
+                num = Math.ceil(num / 100) * 100;
+            }
+            return num;
+        };
+            
         const toPersianDigits = (value) => {
             return String(value).replace(
                 /\d/g,
@@ -1481,7 +1500,7 @@ function generateExcel(calculation, bills, period) {
                 data.push([
                     row.unit,
                     row.people,
-                    cleanNumber(row.amount)
+                    roundAmountForTable(row.amount)
                 ]);
             });
 
@@ -1501,7 +1520,7 @@ function generateExcel(calculation, bills, period) {
                     row.previous,
                     row.current,
                     row.consumption,
-                    cleanNumber(row.amount)
+                    roundAmountForTable(row.amount)
                 ]);
             });
         }
