@@ -135,8 +135,8 @@ function setupJalaliDate(id) {
 
             <div class="calendar-weekdays">
                 ${persianWeekdays
-                    .map(day => `<span>${day}</span>`)
-                    .join('')}
+                .map(day => `<span>${day}</span>`)
+                .join('')}
             </div>
 
             <div class="calendar-days">
@@ -178,7 +178,6 @@ function setupJalaliDate(id) {
             </div>
         `;
 
-        // دکمه‌های تغییر ماه
         calendar.querySelectorAll('[data-move]').forEach(button => {
 
             button.onclick = event => {
@@ -201,7 +200,6 @@ function setupJalaliDate(id) {
             };
         });
 
-        // انتخاب روز
         calendar.querySelectorAll('[data-day]').forEach(button => {
 
             button.onclick = event => {
@@ -217,7 +215,6 @@ function setupJalaliDate(id) {
             };
         });
 
-        // دکمه امروز
         const todayButton = calendar.querySelector(
             '[data-action="today"]'
         );
@@ -235,7 +232,6 @@ function setupJalaliDate(id) {
             );
         };
 
-        // دکمه انصراف
         const cancelButton = calendar.querySelector(
             '[data-action="cancel"]'
         );
@@ -276,9 +272,9 @@ function setDeadlineState() {
     const isUrgent = $('urgentPayment').checked;
     const deadlinePicker = $('paymentDeadline');
     const trigger = deadlinePicker.querySelector('.date-trigger');
-    
+
     trigger.disabled = isUrgent;
-    
+
     if (isUrgent) {
         trigger.innerHTML = 'انتخاب تاریخ <span>▣</span>';
         deadlinePicker.dataset.text = '';
@@ -292,7 +288,7 @@ function setDeadlineState() {
 function toggleFormVisibility() {
     const method = currentMode();
     const sections = document.querySelectorAll('.form-section');
-    
+
     if (method) {
         sections.forEach(section => section.classList.remove('hidden'));
     } else {
@@ -500,14 +496,14 @@ function handleFirstUnitNumberChange(event) {
 function updateTotal() {
     if (currentMode() === 'people') {
         totalUsage.textContent =
-    formatPlainNumber(
-        [...document.querySelectorAll('.people-value')]
-            .reduce(
-                (sum, input) =>
-                    sum + (parseNumber(input.value) || 0),
-                0
-            )
-    );
+            formatPlainNumber(
+                [...document.querySelectorAll('.people-value')]
+                    .reduce(
+                        (sum, input) =>
+                            sum + (parseNumber(input.value) || 0),
+                        0
+                    )
+            );
 
         markDuplicateUnits();
         return;
@@ -588,13 +584,13 @@ function updateTotal() {
             }
 
             consumptionCell.textContent =
-               formatPlainNumber(consumption);
+                formatPlainNumber(consumption);
 
             total += consumption;
         });
 
     totalUsage.textContent =
-    formatPlainNumber(total);
+        formatPlainNumber(total);
 
     markDuplicateUnits();
 }
@@ -676,32 +672,32 @@ function showUnitEditError(message) {
     );
 
     if (emptyExists) {
-    errors.push(
-        'شماره واحد نمی‌تواند خالی باشد.'
-    );
-}
-
-const nonPositiveExists = inputs.some(input => {
-    const value = input.value.trim();
-
-    if (value === '') {
-        return false;
+        errors.push(
+            'شماره واحد نمی‌تواند خالی باشد.'
+        );
     }
 
-    const number = parseNumber(value);
+    const nonPositiveExists = inputs.some(input => {
+        const value = input.value.trim();
 
-    return (
-        !Number.isFinite(number) ||
-        !Number.isInteger(number) ||
-        number <= 0
-    );
-});
+        if (value === '') {
+            return false;
+        }
 
-if (nonPositiveExists) {
-    errors.push(
-        'شماره واحد نمی‌تواند صفر باشد.'
-    );
-}
+        const number = parseNumber(value);
+
+        return (
+            !Number.isFinite(number) ||
+            !Number.isInteger(number) ||
+            number <= 0
+        );
+    });
+
+    if (nonPositiveExists) {
+        errors.push(
+            'شماره واحد نمی‌تواند صفر باشد.'
+        );
+    }
 
     const error = document.createElement('div');
     error.className = 'table-validation-error unit-edit-error';
@@ -737,9 +733,9 @@ function showMethodDescription() {
         'main-meter': 'مبلغ قبوض بر اساس مجموع مصرف کنتورهای اصلی تقسیم می‌شود و سهم هر واحد بر اساس مصرف کنتور فرعی آن واحد تعیین می‌گردد. سپس باقی‌مانده به طور مساوی بین همهٔ واحدها تقسیم می‌شود.',
         'people': 'مبلغ قبوض بر اساس تعداد کل نفرات تقسیم می‌شود و سهم هر واحد بر اساس تعداد ساکنان آن تعیین می‌گردد.'
     };
-    
+
     document.querySelectorAll('.method-description').forEach(el => el.hidden = true);
-    
+
     if (method && descriptions[method]) {
         const descEl = document.getElementById(`desc-${method}`);
         if (descEl) {
@@ -891,19 +887,18 @@ function showTableErrors(
             ⚠️ لطفاً فیلدهای مشخص‌شده را تکمیل یا اصلاح کنید.
         </strong>
 
-        ${
-            filteredSummaries.length
-                ? `
+        ${filteredSummaries.length
+            ? `
                     <ul>
                         ${filteredSummaries
-                            .map(
-                                message =>
-                                    `<li>${escapeHtml(message)}</li>`
-                            )
-                            .join('')}
+                .map(
+                    message =>
+                        `<li>${escapeHtml(message)}</li>`
+                )
+                .join('')}
                     </ul>
                 `
-                : ''
+            : ''
         }
     `;
 
@@ -948,11 +943,11 @@ function validateForm() {
     let hasIncompleteTableFields = false;
 
     if (hasUnconfirmedUnitChanges()) {
-    showUnitEditError(
-        'تغییرات شماره واحدها هنوز ثبت نشده‌اند. برای ثبت، روی ✓ بزنید.'
-    );
+        showUnitEditError(
+            'تغییرات شماره واحدها هنوز ثبت نشده‌اند. برای ثبت، روی ✓ بزنید.'
+        );
 
-    isValid = false;
+        isValid = false;
     }
 
     // دکمه محاسبه بدون انتخاب روش نمایش داده نمی‌شود؛
@@ -1059,182 +1054,182 @@ function validateForm() {
         }
     }
 
- // ===================== روش کنتور فرعی / اصلی =====================
+    // ===================== روش کنتور فرعی / اصلی =====================
 
-if (
-    method === 'sub-meter' ||
-    method === 'main-meter'
-) {
-    const rows =
-        document.querySelectorAll(
-            '#unitsTable tbody tr'
-        );
-
-    if (rows.length === 0) {
-        isValid = false;
-
-    } else {
-
-        let hasIncompleteReadings = false;
-        let hasNegativeReading = false;
-
-        rows.forEach(row => {
-
-            const prevInput =
-                row.querySelector(
-                    '.previous-reading'
-                );
-
-            const currInput =
-                row.querySelector(
-                    '.current-reading'
-                );
-
-            const prevValue =
-                prevInput.value.trim();
-
-            const currValue =
-                currInput.value.trim();
-
-            let rowHasError = false;
-
-            // =============================================
-            // مرحله اول: بررسی خالی بودن
-            // =============================================
-
-            if (
-                prevValue === '' ||
-                currValue === ''
-            ) {
-                hasIncompleteReadings = true;
-                rowHasError = true;
-            }
-
-            // =============================================
-            // مرحله دوم:
-            // فقط وقتی هر دو فیلد پر هستند
-            // بررسی معتبر بودن اعداد و ترتیب آنها
-            // =============================================
-
-            if (
-                prevValue !== '' &&
-                currValue !== ''
-            ) {
-
-                const previous =
-                    parseNumber(prevValue);
-
-                const current =
-                    parseNumber(currValue);
-
-                if (
-                    !Number.isFinite(previous) ||
-                    !Number.isFinite(current) ||
-                    previous < 0 ||
-                    current < 0
-                ) {
-                    rowHasError = true;
-                }
-
-                // رقم فعلی نباید کمتر از رقم قبلی باشد
-                if (
-                    Number.isFinite(previous) &&
-                    Number.isFinite(current) &&
-                    current < previous
-                ) {
-                    hasNegativeReading = true;
-                    rowHasError = true;
-                }
-            }
-
-            if (rowHasError) {
-                row.classList.add(
-                    'validation-row-error'
-                );
-
-                isValid = false;
-            }
-        });
-
-        // =============================================
-        // اگر حتی یک فیلد خالی باشد،
-        // فقط پیام کلی نمایش داده شود.
-        // =============================================
-
-        if (hasIncompleteReadings) {
-
-            tableErrorSummaries.push(
-                'لطفاً فیلدهای مشخص‌شده را تکمیل یا اصلاح کنید.'
+    if (
+        method === 'sub-meter' ||
+        method === 'main-meter'
+    ) {
+        const rows =
+            document.querySelectorAll(
+                '#unitsTable tbody tr'
             );
+
+        if (rows.length === 0) {
+            isValid = false;
 
         } else {
 
-            // =============================================
-            // همه فیلدها پر هستند.
-            // حالا مجموع مصرف معتبر را محاسبه می‌کنیم.
-            // =============================================
-
-            let validTotalConsumption = 0;
+            let hasIncompleteReadings = false;
+            let hasNegativeReading = false;
 
             rows.forEach(row => {
 
-                const previous =
-                    parseNumber(
-                        row.querySelector(
-                            '.previous-reading'
-                        ).value
+                const prevInput =
+                    row.querySelector(
+                        '.previous-reading'
                     );
 
-                const current =
-                    parseNumber(
-                        row.querySelector(
-                            '.current-reading'
-                        ).value
+                const currInput =
+                    row.querySelector(
+                        '.current-reading'
                     );
 
-                // فقط ردیف‌هایی که رقم فعلی از قبلی
-                // کمتر نیست وارد مجموع می‌شوند.
+                const prevValue =
+                    prevInput.value.trim();
+
+                const currValue =
+                    currInput.value.trim();
+
+                let rowHasError = false;
+
+                // =============================================
+                // مرحله اول: بررسی خالی بودن
+                // =============================================
+
                 if (
-                    Number.isFinite(previous) &&
-                    Number.isFinite(current) &&
-                    previous >= 0 &&
-                    current >= 0 &&
-                    current >= previous
+                    prevValue === '' ||
+                    currValue === ''
                 ) {
-                    validTotalConsumption +=
-                        current - previous;
+                    hasIncompleteReadings = true;
+                    rowHasError = true;
+                }
+
+                // =============================================
+                // مرحله دوم:
+                // فقط وقتی هر دو فیلد پر هستند
+                // بررسی معتبر بودن اعداد و ترتیب آنها
+                // =============================================
+
+                if (
+                    prevValue !== '' &&
+                    currValue !== ''
+                ) {
+
+                    const previous =
+                        parseNumber(prevValue);
+
+                    const current =
+                        parseNumber(currValue);
+
+                    if (
+                        !Number.isFinite(previous) ||
+                        !Number.isFinite(current) ||
+                        previous < 0 ||
+                        current < 0
+                    ) {
+                        rowHasError = true;
+                    }
+
+                    // رقم فعلی نباید کمتر از رقم قبلی باشد
+                    if (
+                        Number.isFinite(previous) &&
+                        Number.isFinite(current) &&
+                        current < previous
+                    ) {
+                        hasNegativeReading = true;
+                        rowHasError = true;
+                    }
+                }
+
+                if (rowHasError) {
+                    row.classList.add(
+                        'validation-row-error'
+                    );
+
+                    isValid = false;
                 }
             });
 
             // =============================================
-            // خطای مصرف منفی
+            // اگر حتی یک فیلد خالی باشد،
+            // فقط پیام کلی نمایش داده شود.
             // =============================================
 
-            if (hasNegativeReading) {
+            if (hasIncompleteReadings) {
 
                 tableErrorSummaries.push(
-                    'رقم فعلی کنتور نمی‌تواند کمتر از رقم قبلی باشد.'
-                );
-            }
-
-            // =============================================
-            // خطای مجموع مصرف صفر
-            //
-            // حتی اگر همزمان خطای مصرف منفی وجود داشته باشد،
-            // این خطا نیز مستقل بررسی می‌شود.
-            // =============================================
-
-            if (validTotalConsumption === 0) {
-
-                tableErrorSummaries.push(
-                    'مجموع مصرف کنتورهای فرعی باید بیشتر از صفر باشد.'
+                    'لطفاً فیلدهای مشخص‌شده را تکمیل یا اصلاح کنید.'
                 );
 
-                isValid = false;
+            } else {
+
+                // =============================================
+                // همه فیلدها پر هستند.
+                // حالا مجموع مصرف معتبر را محاسبه می‌کنیم.
+                // =============================================
+
+                let validTotalConsumption = 0;
+
+                rows.forEach(row => {
+
+                    const previous =
+                        parseNumber(
+                            row.querySelector(
+                                '.previous-reading'
+                            ).value
+                        );
+
+                    const current =
+                        parseNumber(
+                            row.querySelector(
+                                '.current-reading'
+                            ).value
+                        );
+
+                    // فقط ردیف‌هایی که رقم فعلی از قبلی
+                    // کمتر نیست وارد مجموع می‌شوند.
+                    if (
+                        Number.isFinite(previous) &&
+                        Number.isFinite(current) &&
+                        previous >= 0 &&
+                        current >= 0 &&
+                        current >= previous
+                    ) {
+                        validTotalConsumption +=
+                            current - previous;
+                    }
+                });
+
+                // =============================================
+                // خطای مصرف منفی
+                // =============================================
+
+                if (hasNegativeReading) {
+
+                    tableErrorSummaries.push(
+                        'رقم فعلی کنتور نمی‌تواند کمتر از رقم قبلی باشد.'
+                    );
+                }
+
+                // =============================================
+                // خطای مجموع مصرف صفر
+                //
+                // حتی اگر همزمان خطای مصرف منفی وجود داشته باشد،
+                // این خطا نیز مستقل بررسی می‌شود.
+                // =============================================
+
+                if (validTotalConsumption === 0) {
+
+                    tableErrorSummaries.push(
+                        'مجموع مصرف کنتورهای فرعی باید بیشتر از صفر باشد.'
+                    );
+
+                    isValid = false;
+                }
             }
         }
     }
-}
 
     // ===================== روش تعداد نفرات =====================
 
@@ -1250,82 +1245,78 @@ if (
 
         } else {
 
-rows.forEach((row, index) => {
+            rows.forEach((row, index) => {
 
-    const peopleInput =
-        row.querySelector(
-            '.people-value'
-        );
+                const peopleInput =
+                    row.querySelector(
+                        '.people-value'
+                    );
 
-    const unitInput =
-        row.querySelector(
-            '.unit-number'
-        );
+                const unitInput =
+                    row.querySelector(
+                        '.unit-number'
+                    );
 
-    const unit =
-        unitInput
-            ? unitInput.value.trim()
-            : index + 1;
+                const unit =
+                    unitInput
+                        ? unitInput.value.trim()
+                        : index + 1;
 
-    const peopleValue =
-        peopleInput.value.trim();
+                const peopleValue =
+                    peopleInput.value.trim();
 
-    let rowHasError = false;
+                let rowHasError = false;
 
-    if (peopleValue === '') {
+                if (peopleValue === '') {
 
-        rowHasError = true;
+                    rowHasError = true;
 
-        tableErrors.push(
-            `واحد ${unit}: تعداد نفرات وارد نشده است.`
-        );
+                    tableErrors.push(
+                        `واحد ${unit}: تعداد نفرات وارد نشده است.`
+                    );
 
-    } else {
+                } else {
 
-        const people =
-            parseNumber(peopleValue);
+                    const people =
+                        parseNumber(peopleValue);
 
-        if (
-            isNaN(people) ||
-            people < 1 ||
-            !Number.isInteger(people)
-        ) {
-            rowHasError = true;
+                    if (
+                        isNaN(people) ||
+                        people < 1 ||
+                        !Number.isInteger(people)
+                    ) {
+                        rowHasError = true;
 
-            tableErrors.push(
-                `واحد ${unit}: تعداد نفرات معتبر نیست.`
-            );
-        }
-    }
+                        tableErrors.push(
+                            `واحد ${unit}: تعداد نفرات معتبر نیست.`
+                        );
+                    }
+                }
 
-    if (rowHasError) {
-        row.classList.add(
-            'validation-row-error'
-        );
+                if (rowHasError) {
+                    row.classList.add(
+                        'validation-row-error'
+                    );
 
-        isValid = false;
-    }
-});
+                    isValid = false;
+                }
+            });
         }
     }
 
     // ===================== نمایش خطاهای جدول =====================
 
-    // ===================== نمایش خطاهای جدول =====================
+    if (
+        tableErrors.length > 0 ||
+        tableErrorSummaries.length > 0
+    ) {
+        showTableErrors(
+            tableErrors,
+            tableErrorSummaries
+        );
+    }
 
-// ===================== نمایش خطاهای جدول =====================
-
-if (
-    tableErrors.length > 0 ||
-    tableErrorSummaries.length > 0
-) {
-    showTableErrors(
-        tableErrors,
-        tableErrorSummaries
-    );
-}
-
-return isValid;
+    return isValid;
 }
 
 function renderResult(calculation, bills, period) {
@@ -1341,31 +1332,31 @@ function renderResult(calculation, bills, period) {
     };
     const header = isMeter ? '<tr><th>واحد</th><th>رقم قبلی</th><th>رقم فعلی</th><th>مقدار مصرف</th><th>مبلغ</th></tr>' : '<tr><th>واحد</th><th>تعداد نفرات</th><th>مبلغ</th></tr>';
     const rows = calculation.rows.map(row => isMeter
-    ? `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.previous)}</td><td>${formatPlainNumber(row.current)}</td><td>${formatPlainNumber(row.consumption)}</td><td>${displayAmount(row.amount)}</td></tr>`
-    : `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.people)}</td><td>${displayAmount(row.amount)}</td></tr>`
-).join('');
+        ? `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.previous)}</td><td>${formatPlainNumber(row.current)}</td><td>${formatPlainNumber(row.consumption)}</td><td>${displayAmount(row.amount)}</td></tr>`
+        : `<tr><td>${formatPlainNumber(row.unit)}</td><td>${formatPlainNumber(row.people)}</td><td>${displayAmount(row.amount)}</td></tr>`
+    ).join('');
     const deadline = $('urgentPayment').checked ? 'فوری' : getSelectedDate('paymentDeadline', 'مهلت پرداخت').text;
     const cardValue = $('cardNumber').value.trim();
 
-const card = cardValue
-    ? `<span class="card-number" dir="auto">${escapeHtml(cardValue)}</span>`
-    : 'ثبت نشده';
+    const card = cardValue
+        ? `<span class="card-number" dir="auto">${escapeHtml(cardValue)}</span>`
+        : 'ثبت نشده';
     const notes = $('notes').value.trim() ? `<p><b>توضیحات:</b> ${escapeHtml($('notes').value).replace(/\n/g, '<br>')}</p>` : '';
     const summary = isMeter
-    ? `<p><b>مجموع مصرف:</b> ${formatPlainNumber(calculation.totalConsumption)}</p>${calculation.mainMeter ? `<p><b>مجموع مصرف کنتورهای اصلی:</b> ${formatPlainNumber(calculation.mainMeter)}</p>` : ''}`
-    : `<p><b>تعداد کل نفرات:</b> ${formatPlainNumber(calculation.totalPeople)}</p>`;
+        ? `<p><b>مجموع مصرف:</b> ${formatPlainNumber(calculation.totalConsumption)}</p>${calculation.mainMeter ? `<p><b>مجموع مصرف کنتورهای اصلی:</b> ${formatPlainNumber(calculation.mainMeter)}</p>` : ''}`
+        : `<p><b>تعداد کل نفرات:</b> ${formatPlainNumber(calculation.totalPeople)}</p>`;
     const remainder = calculation.remainder === undefined ? '' : `<p><b>باقی‌مانده تقسیم شده:</b> ${formatMoney(Math.round(calculation.remainder))}</p><p><b>سهم باقی‌مانده هر واحد:</b> ${formatMoney(Math.round(calculation.equalShare))}</p>`;
-    
+
     const totalAmount = `<p><b>مجموع مبلغ قبوض:</b> ${formatMoney(calculation.billAmount)}</p>`;
-    
+
     let perPersonShare = '';
     if (currentMode() === 'people' && calculation.totalPeople > 0) {
         const perPerson = calculation.billAmount / calculation.totalPeople;
         perPersonShare = `<p><b>سهم هر نفر:</b> ${formatMoney(Math.round(perPerson))}</p>`;
     }
-    
+
     const monthName = getMonthFromDate(period.end);
-    
+
     const printButton = `<div style="text-align: center; margin-top: 20px;" class="no-print">
     <button id="printBtnInside" class="secondary-button" style="display: inline-block; padding: 10px 20px;">
         🖨️ چاپ
@@ -1384,27 +1375,27 @@ const card = cardValue
 
     const printBtnInside = document.getElementById('printBtnInside');
 
-if (printBtnInside) {
-    printBtnInside.addEventListener('click', function() {
-        window.print();
-    });
-}
+    if (printBtnInside) {
+        printBtnInside.addEventListener('click', function () {
+            window.print();
+        });
+    }
 
-const pdfBtnInside = document.getElementById('pdfBtnInside');
+    const pdfBtnInside = document.getElementById('pdfBtnInside');
 
-if (pdfBtnInside) {
-    pdfBtnInside.addEventListener('click', function() {
-        generatePDF();
-    });
-}
+    if (pdfBtnInside) {
+        pdfBtnInside.addEventListener('click', function () {
+            generatePDF();
+        });
+    }
 
-const excelBtnInside = document.getElementById('excelBtnInside');
+    const excelBtnInside = document.getElementById('excelBtnInside');
 
-if (excelBtnInside) {
-    excelBtnInside.addEventListener('click', function() {
-        generateExcel(calculation, bills, period);
-    });
-}
+    if (excelBtnInside) {
+        excelBtnInside.addEventListener('click', function () {
+            generateExcel(calculation, bills, period);
+        });
+    }
 }
 
 function generateExcel(calculation, bills, period) {
@@ -1461,7 +1452,7 @@ function generateExcel(calculation, bills, period) {
             }
             return num;
         };
-            
+
         const toPersianDigits = (value) => {
             return String(value).replace(
                 /\d/g,
@@ -1470,10 +1461,10 @@ function generateExcel(calculation, bills, period) {
         };
 
         const formatDaysWithParentheses = (days) => {
-    const RLM = '\u200F';
+            const RLM = '\u200F';
 
-    return `(${RLM}${toPersianDigits(cleanNumber(days))} روز${RLM})`;
-};
+            return `(${RLM}${toPersianDigits(cleanNumber(days))} روز${RLM})`;
+        };
 
         // =====================================================
         // داده‌های Excel
@@ -1911,33 +1902,33 @@ function generateExcel(calculation, bills, period) {
             }
 
             const amountColumn =
-    isPeopleMode ? 2 : 4;
+                isPeopleMode ? 2 : 4;
 
-for (
-    let col = 0;
-    col < tableColumns;
-    col++
-) {
+            for (
+                let col = 0;
+                col < tableColumns;
+                col++
+            ) {
 
-    const cell =
-        XLSX.utils.encode_cell({
-            r: row - 1,
-            c: col
-        });
+                const cell =
+                    XLSX.utils.encode_cell({
+                        r: row - 1,
+                        c: col
+                    });
 
-    if (!worksheet[cell]) {
-        continue;
-    }
+                if (!worksheet[cell]) {
+                    continue;
+                }
 
-    if (col === amountColumn) {
-        // مبلغ → با جداکننده هزارگان
-        worksheet[cell].z = '#,##0';
-    } else {
-        // شماره واحد، کنتور، مصرف و تعداد نفرات
-        // → بدون جداکننده هزارگان
-        worksheet[cell].z = '0';
-    }
-}
+                if (col === amountColumn) {
+                    // مبلغ → با جداکننده هزارگان
+                    worksheet[cell].z = '#,##0';
+                } else {
+                    // شماره واحد، کنتور، مصرف و تعداد نفرات
+                    // → بدون جداکننده هزارگان
+                    worksheet[cell].z = '0';
+                }
+            }
         }
 
         // =====================================================
@@ -1952,41 +1943,41 @@ for (
 
         // عنوان
         worksheet[`A${summaryTitleRow}`] = {
-    v: 'اطلاعات قبض و خلاصه محاسبات',
-    t: 's',
-    s: summaryTitleStyle
-};
+            v: 'اطلاعات قبض و خلاصه محاسبات',
+            t: 's',
+            s: summaryTitleStyle
+        };
 
-worksheet['!merges'].push({
-    s: {
-        r: summaryTitleRow - 1,
-        c: 0
-    },
+        worksheet['!merges'].push({
+            s: {
+                r: summaryTitleRow - 1,
+                c: 0
+            },
 
-    e: {
-        r: summaryTitleRow - 1,
-        c: 3
-    }
-});
+            e: {
+                r: summaryTitleRow - 1,
+                c: 3
+            }
+        });
 
-// ایجاد سلول‌های عنوان برای کامل شدن کادر بالای جدول
-worksheet[`B${summaryTitleRow}`] = {
-    v: '',
-    t: 's',
-    s: summaryTitleStyle
-};
+        // ایجاد سلول‌های عنوان برای کامل شدن کادر بالای جدول
+        worksheet[`B${summaryTitleRow}`] = {
+            v: '',
+            t: 's',
+            s: summaryTitleStyle
+        };
 
-worksheet[`C${summaryTitleRow}`] = {
-    v: '',
-    t: 's',
-    s: summaryTitleStyle
-};
+        worksheet[`C${summaryTitleRow}`] = {
+            v: '',
+            t: 's',
+            s: summaryTitleStyle
+        };
 
-worksheet[`D${summaryTitleRow}`] = {
-    v: '',
-    t: 's',
-    s: summaryTitleStyle
-};
+        worksheet[`D${summaryTitleRow}`] = {
+            v: '',
+            t: 's',
+            s: summaryTitleStyle
+        };
 
         // =====================================================
         // ستون توضیحات E
@@ -2058,66 +2049,66 @@ worksheet[`D${summaryTitleRow}`] = {
         // و جداکننده هزارگان می‌گیرند.
 
         const formatSummaryNumber = (
-    cellAddress,
-    useThousandsSeparator = false
-) => {
+            cellAddress,
+            useThousandsSeparator = false
+        ) => {
 
-    if (
-        worksheet[cellAddress] &&
-        typeof worksheet[cellAddress].v === 'number'
-    ) {
+            if (
+                worksheet[cellAddress] &&
+                typeof worksheet[cellAddress].v === 'number'
+            ) {
 
-        worksheet[cellAddress].z =
-            useThousandsSeparator
-                ? '#,##0'
-                : '0';
-    }
-};
-for (
-    let row = summaryStartRow;
-    row < summaryStartRow + summaryRows;
-    row++
-) {
+                worksheet[cellAddress].z =
+                    useThousandsSeparator
+                        ? '#,##0'
+                        : '0';
+            }
+        };
+        for (
+            let row = summaryStartRow;
+            row < summaryStartRow + summaryRows;
+            row++
+        ) {
 
-    // به‌صورت پیش‌فرض همه اعداد بدون جداکننده هستند.
-    formatSummaryNumber(`B${row}`, false);
-    formatSummaryNumber(`D${row}`, false);
-}
+            // به‌صورت پیش‌فرض همه اعداد بدون جداکننده هستند.
+            formatSummaryNumber(`B${row}`, false);
+            formatSummaryNumber(`D${row}`, false);
+        }
 
-// =====================================================
-// فرمت مبالغ در جدول خلاصه
-// فقط مبالغ → با جداکننده هزارگان
-// =====================================================
+        // =====================================================
+        // فرمت مبالغ در جدول خلاصه
+        // فقط مبالغ → با جداکننده هزارگان
+        // =====================================================
 
-const moneyCells = [];
+        const moneyCells = [];
 
-if (isSubMeterMode) {
-    // مجموع مبلغ قبوض
-    moneyCells.push(`D${summaryStartRow}`);
-}
+        if (isSubMeterMode) {
+            // مجموع مبلغ قبوض
+            moneyCells.push(`D${summaryStartRow}`);
+        }
 
-if (isMainMeterMode) {
-    // مجموع مبلغ قبوض
-    moneyCells.push(`B${summaryStartRow + 1}`);
+        if (isMainMeterMode) {
+            // مجموع مبلغ قبوض
+            moneyCells.push(`B${summaryStartRow + 1}`);
 
-    // باقی‌مانده تقسیم شده
-    moneyCells.push(`B${summaryStartRow + 3}`);
+            // باقی‌مانده تقسیم شده
+            moneyCells.push(`B${summaryStartRow + 3}`);
 
-    // سهم باقی‌مانده هر واحد
-    moneyCells.push(`D${summaryStartRow + 3}`);
-}
+            // سهم باقی‌مانده هر واحد
+            moneyCells.push(`D${summaryStartRow + 3}`);
+        }
 
-if (isPeopleMode) {
-    // مجموع مبلغ قبوض
-    moneyCells.push(`B${summaryStartRow + 1}`);
+        if (isPeopleMode) {
+            // مجموع مبلغ قبوض
+            moneyCells.push(`B${summaryStartRow + 1}`);
 
-    // سهم هر نفر
-    moneyCells.push(`D${summaryStartRow + 2}`);
-}
+            // سهم هر نفر
+            moneyCells.push(`D${summaryStartRow + 2}`);
+        }
 
-moneyCells.forEach(cellAddress => {
-    formatSummaryNumber(cellAddress, true);
-});
+        moneyCells.forEach(cellAddress => {
+            formatSummaryNumber(cellAddress, true);
+        });
 
         // =====================================================
         // توضیحات
@@ -2242,9 +2233,9 @@ moneyCells.forEach(cellAddress => {
         for (
             let i = summaryStartRow - 1;
             i <
-                summaryStartRow +
-                summaryRows -
-                1;
+            summaryStartRow +
+            summaryRows -
+            1;
             i++
         ) {
 
@@ -2286,9 +2277,9 @@ moneyCells.forEach(cellAddress => {
         for (
             let i = summaryStartRow - 1;
             i <
-                summaryStartRow +
-                summaryRows -
-                1;
+            summaryStartRow +
+            summaryRows -
+            1;
             i++
         ) {
 
@@ -2601,91 +2592,91 @@ async function generatePDF() {
         // فاصله بین جدول و خلاصه
         const summaryGap = 20;
 
-// =====================================================
-// تعیین صفحات به صورت ترتیبی
-//
-// ردیف‌ها از ابتدای جدول به ترتیب وارد صفحات می‌شوند.
-// صفحه اول و صفحات میانی تا حد ظرفیت پر می‌شوند.
-// =====================================================
+        // =====================================================
+        // تعیین صفحات به صورت ترتیبی
+        //
+        // ردیف‌ها از ابتدای جدول به ترتیب وارد صفحات می‌شوند.
+        // صفحه اول و صفحات میانی تا حد ظرفیت پر می‌شوند.
+        // =====================================================
 
-const pageChunks = [];
+        const pageChunks = [];
 
-let currentChunk = [];
-let currentHeight = headerHeight;
+        let currentChunk = [];
+        let currentHeight = headerHeight;
 
-for (
-    let i = 0;
-    i < rowCount;
-    i++
-) {
+        for (
+            let i = 0;
+            i < rowCount;
+            i++
+        ) {
 
-    const rowHeight =
-        rowHeights[i];
+            const rowHeight =
+                rowHeights[i];
 
-    if (
-        currentChunk.length > 0 &&
-        currentHeight + rowHeight >
-        safePageHeightPx
-    ) {
+            if (
+                currentChunk.length > 0 &&
+                currentHeight + rowHeight >
+                safePageHeightPx
+            ) {
 
-        pageChunks.push({
-            rows: currentChunk,
-            isLast: false
-        });
+                pageChunks.push({
+                    rows: currentChunk,
+                    isLast: false
+                });
 
-        currentChunk = [];
-        currentHeight = headerHeight;
-    }
+                currentChunk = [];
+                currentHeight = headerHeight;
+            }
 
-    currentChunk.push(i);
-    currentHeight += rowHeight;
-}
+            currentChunk.push(i);
+            currentHeight += rowHeight;
+        }
 
-// آخرین بخش جدول
-if (currentChunk.length > 0) {
+        // آخرین بخش جدول
+        if (currentChunk.length > 0) {
 
-    const lastChunkHeight =
-        currentHeight +
-        summaryGap +
-        summaryHeight;
+            const lastChunkHeight =
+                currentHeight +
+                summaryGap +
+                summaryHeight;
 
-    // اگر جدول + خلاصه در همین صفحه جا می‌شوند،
-    // همین صفحه آخر واقعی است.
-    if (
-        lastChunkHeight <=
-        safePageHeightPx
-    ) {
+            // اگر جدول + خلاصه در همین صفحه جا می‌شوند،
+            // همین صفحه آخر واقعی است.
+            if (
+                lastChunkHeight <=
+                safePageHeightPx
+            ) {
 
-        pageChunks.push({
-            rows: currentChunk,
-            isLast: true
-        });
+                pageChunks.push({
+                    rows: currentChunk,
+                    isLast: true
+                });
 
-    } else {
+            } else {
 
-        // اگر خلاصه در این صفحه جا نشود،
-        // ردیف‌های جدول در یک صفحه مستقل می‌مانند
-        // و صفحه بعد فقط برای خلاصه ساخته می‌شود.
+                // اگر خلاصه در این صفحه جا نشود،
+                // ردیف‌های جدول در یک صفحه مستقل می‌مانند
+                // و صفحه بعد فقط برای خلاصه ساخته می‌شود.
 
-        pageChunks.push({
-            rows: currentChunk,
-            isLast: false
-        });
+                pageChunks.push({
+                    rows: currentChunk,
+                    isLast: false
+                });
 
-        pageChunks.push({
-            rows: [],
-            isLast: true
-        });
-    }
+                pageChunks.push({
+                    rows: [],
+                    isLast: true
+                });
+            }
 
-} else {
+        } else {
 
-    // حالت بدون ردیف
-    pageChunks.push({
-        rows: [],
-        isLast: true
-    });
-}
+            // حالت بدون ردیف
+            pageChunks.push({
+                rows: [],
+                isLast: true
+            });
+        }
 
         // =====================================================
         // حذف نسخه اندازه‌گیری
